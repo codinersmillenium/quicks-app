@@ -29,7 +29,7 @@ body {
   font-family: 'Lato';
   background-color: var(--bg-background);
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale;  
 }
 
 .app-container {
@@ -381,3 +381,16 @@ select {
 //   padding: 0;
 //   cursor: pointer;
 // }
+.backdrop {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: #FFFFFF;
+
+  opacity: 60%;
+  background-size: cover;
+  z-index: 1;
+  .loading-card {
+    z-index: 2;
+  }
+}

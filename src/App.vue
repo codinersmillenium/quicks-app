@@ -1,4 +1,15 @@
 <template>
+  <div class="backdrop" v-if="initLoad">
+    <div class="loading-card">
+        <svg class="loading" viewBox="0 0 50 50">
+            <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
+        </svg>
+        <span class="loading-title">Initial User ID</span>  
+    </div>
+  </div>
+  <div>
+    
+  </div>
   <div class="app-container">
 
     <div class="app-sidebar">
@@ -105,8 +116,8 @@
     components: {
       Inbox, Task
     },
-    created () {
-      this.initUser();
+    async fetch () {
+      await this.initUser();
     },
     data() {
         return {
@@ -119,12 +130,15 @@
               },
               data: btnActionDefault
             },
-            card: null
+            card: null,
+            initLoad: false,
+            id: localStorage.getItem('id-session')
         };
     },
     methods: {
       async initUser () {
-        if (!localStorage.getItem('id-session')) {
+        if (!id) {
+          this.iniLoad = true;
           let header = this.axiosHeader;
           header.headers['Content-Type'] = 'application/json';
           let str = generateStr(8);
@@ -135,7 +149,9 @@
           };
           await this.axios.post(Env.URL_API + 'user/create', post, header).then(({ data }) => {
             localStorage.setItem('id-session', data.id);
+            this.iniLoad = false;
           }).catch((error) => {
+            this.iniLoad = false;
             console.log(error);
           });
         }
