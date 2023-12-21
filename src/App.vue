@@ -139,20 +139,20 @@
     methods: {
       async initUser () {
         if (!this.id) {
-          this.iniLoad = true;
+          this.initLoad = true;
           let header = this.axiosHeader;
           header.headers['Content-Type'] = 'application/json';
           let str = generateStr(8);
           const post = {
-            "firstName": "user", 
+            "firstName": "user_" + str, 
             "lastName": "dummy",
             "email": str + "@xhr.com"
           };
           await this.axios.post(Env.URL_API + 'user/create', post, header).then(({ data }) => {
             localStorage.setItem('id-session', data.id);
-            this.iniLoad = false;
+            location.reload();
           }).catch((error) => {
-            this.iniLoad = false;
+            this.initLoad = false;
             console.log(error);
           });
         }

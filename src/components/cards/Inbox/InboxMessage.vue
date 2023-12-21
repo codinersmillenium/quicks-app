@@ -97,12 +97,12 @@
                         <div class="flex-row flex-start">
                             <div class="chat left">
                                 <div class="chat-name left new">
-                                    Lorem ipsum
+                                    Template New Message
                                 </div>
                                 <div class="chat-desc">
                                     <div class="chat-card left new">
                                         <div class="chat-text">
-                                            Lorem ipsum .
+                                            if new message ( no dynamic, but service not support)
                                         </div>
                                         <div class="chat-time">
                                             12.00
@@ -114,8 +114,8 @@
                                 </div>
                             </div>
                         </div> 
-                        <!-- end -->
 
+                        <!-- end -->
                         <div class="body-foot mt-20">
                             <div class="card-message-loading" v-if="loading">
                                 <svg viewBox="0 0 50 50">
