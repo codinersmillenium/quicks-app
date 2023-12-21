@@ -28,12 +28,16 @@ export const inboxStore = defineStore("inbox", () => {
             index.time = convertDate(index.publishDate, 'time');
             index.date = convertDate(index.publishDate, 'en', 'disabled');
         }
+        sort(response, 'publishDate', '');
         let groupBy = response.reduce((hash, obj) => {
           if(obj['owner']['id'] === undefined) return hash; 
           return Object.assign(hash, { [obj['owner']['id']]:( hash[obj['owner']['id']] || [] ).concat(obj)})
         }, {});
-        sort(response, 'publishDate', '');
-        detailInbox.value.data = response;
+        let groupByDate = response.reduce((hash, obj) => {
+          if(obj['date'] === undefined) return hash; 
+          return Object.assign(hash, { [obj['date']]:( hash[obj['date']] || [] ).concat(obj)})
+        }, {});        
+        detailInbox.value.data = groupByDate;
         detailInbox.value.header.total = Object.keys(groupBy).length;
     }).catch((err) => {
         error.value = 1;

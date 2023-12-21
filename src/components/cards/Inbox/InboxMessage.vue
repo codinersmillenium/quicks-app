@@ -16,91 +16,72 @@
             <div class="card-body">
                <div class="chat-content">
                     <div class="chat-body" id="chatBody">
-
-                        <!-- <div class="flex-row flex-end" data-id="1">
-                            <div class="chat right">
-                                <div class="chat-name right">
-                                    Lorem ipsum
+                        <template v-for="(_row, _i) in data" :key="_i">
+                            <template v-for="(row, i) in _row" :key="i">
+                                <div class="flex-row flex-end" data-id="1" v-if="row.owner.id === id_sess">
+                                    <div class="chat right">
+                                        <div class="chat-name right">
+                                            You
+                                        </div>
+                                        <div class="chat-desc">
+                                            <button class="btn-chat-edit" @click="showEditDropdown($event, 'edit-msg-' + i)">
+                                                <img src="/icon/btn_edit_msg.svg"/>
+                                                <div class="dropdown-contet none" :id="'edit-msg-' + i">
+                                                    <a class="edit" @click="editMessage(row)">
+                                                        <span>Edit</span>
+                                                    </a>
+                                                    <hr/>
+                                                    <a class="delete" @click="deleteMessage(row.id)">
+                                                        <span>Delete</span>
+                                                    </a>
+                                                </div>
+                                            </button>
+                                            <div class="chat-card right">
+                                                <div class="chat-text">
+                                                    {{ row.message }}
+                                                </div>
+                                                <div class="chat-time">
+                                                    {{ row.time }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="chat-desc">
-                                    <button class="btn-chat-edit" @click="showClass($event, 'edit-msg-1')">
-                                        <img src="/icon/btn_edit_msg.svg"/>
-                                        <div class="dropdown-contet none" id="edit-msg-1">
-                                            <a class="edit">
-                                                <span>Edit</span>
-                                            </a>
-                                            <hr/>
-                                            <a class="delete">
-                                                <span>Delete</span>
-                                            </a>
+                                <div class="flex-row flex-start" v-else>
+                                    <div class="chat left">
+                                        <div class="chat-name left">
+                                            {{ row.owner.firstName }}
                                         </div>
-                                    </button>
-                                    <div class="chat-card right">
-                                        <div class="chat-text">
-                                            Lorem ipsum.
-                                        </div>
-                                        <div class="chat-time">
-                                            12.pm
+                                        <div class="chat-desc">
+                                            <div class="chat-card left">
+                                                <div class="chat-text">
+                                                    {{ row.message }}
+                                                </div>
+                                                <div class="chat-time">
+                                                    {{ row.time }}
+                                                </div>
+                                            </div>
+                                            <button class="btn-chat-edit">
+                                                <img src="/icon/btn_edit_msg.svg"/>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>
+                            </template>
+                            <div class="row col-12 mbmt-15" v-if="_row.length > 0">
+                                <div class="col-4">
+                                    <hr class="line-gray-1"/>
+                                </div>
+                                <div class="col-4 text-center fs-3 fs-bold fs-gray-4">
+                                    Today {{ _i }}
+                                </div>
+                                <div class="col-4">
+                                    <hr class="line-gray-1"/>
+                                </div>
                             </div>
-                        </div>
+                        </template>
 
-                        <div class="flex-row flex-start">
-                            <div class="chat left">
-                                <div class="chat-name left">
-                                    Lorem ipsum
-                                </div>
-                                <div class="chat-desc">
-                                    <div class="chat-card left">
-                                        <div class="chat-text">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta quisquam deleniti, fugiat repellendus sapiente asperiores accusamus amet voluptate facilis! Sed illo ipsum incidunt quibusdam perferendis voluptate quos repudiandae laudantium enim.
-                                        </div>
-                                        <div class="chat-time">
-                                            12.pm
-                                        </div>
-                                    </div>
-                                    <button class="btn-chat-edit">
-                                        <img src="/icon/btn_edit_msg.svg"/>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="row col-12 mbmt-15">
-                            <div class="col-4">
-                                <hr class="line-gray-1"/>
-                            </div>
-                            <div class="col-4 text-center fs-3 fs-bold fs-gray-4">
-                                Today June 09, 2021
-                            </div>
-                            <div class="col-4">
-                                <hr class="line-gray-1"/>
-                            </div>
-                        </div>
-
-                        <div class="flex-row flex-start">
-                            <div class="chat left">
-                                <div class="chat-name left">
-                                    Lorem ipsum
-                                </div>
-                                <div class="chat-desc">
-                                    <div class="chat-card left">
-                                        <div class="chat-text">
-                                            Lorem ipsum .
-                                        </div>
-                                        <div class="chat-time">
-                                            12.pm
-                                        </div>
-                                    </div>
-                                    <button class="btn-chat-edit">
-                                        <img src="/icon/btn_edit_msg.svg"/>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        
+                        <!-- fixed element -->
                         <div class="row col-12 mbmt-15">
                             <div class="col-4">
                                 <hr class="line-red-1"/>
@@ -124,7 +105,7 @@
                                             Lorem ipsum .
                                         </div>
                                         <div class="chat-time">
-                                            12.pm
+                                            12.00
                                         </div>
                                     </div>
                                     <button class="btn-chat-edit">
@@ -132,69 +113,8 @@
                                     </button>
                                 </div>
                             </div>
-                        </div> -->
-                        <template v-for="(row, i) in data" :key="i">
-                            <div class="flex-row flex-end" data-id="1" v-if="row.owner.id === id_sess">
-                                <div class="chat right">
-                                    <div class="chat-name right">
-                                        You
-                                    </div>
-                                    <div class="chat-desc">
-                                        <button class="btn-chat-edit" @click="showEditDropdown($event, 'edit-msg-' + i)">
-                                            <img src="/icon/btn_edit_msg.svg"/>
-                                            <div class="dropdown-contet none" :id="'edit-msg-' + i">
-                                                <a class="edit" @click="editMessage(row)">
-                                                    <span>Edit</span>
-                                                </a>
-                                                <hr/>
-                                                <a class="delete" @click="deleteMessage(row.id)">
-                                                    <span>Delete</span>
-                                                </a>
-                                            </div>
-                                        </button>
-                                        <div class="chat-card right">
-                                            <div class="chat-text">
-                                                {{ row.message }}
-                                            </div>
-                                            <div class="chat-time">
-                                                {{ row.time }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="flex-row flex-start" v-else>
-                                <div class="chat left">
-                                    <div class="chat-name left">
-                                        {{ row.owner.firstName }}
-                                    </div>
-                                    <div class="chat-desc">
-                                        <div class="chat-card left">
-                                            <div class="chat-text">
-                                                {{ row.message }}
-                                            </div>
-                                            <div class="chat-time">
-                                                {{ row.time }}
-                                            </div>
-                                        </div>
-                                        <button class="btn-chat-edit">
-                                            <img src="/icon/btn_edit_msg.svg"/>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row col-12 mbmt-15">
-                                <div class="col-4">
-                                    <hr class="line-gray-1"/>
-                                </div>
-                                <div class="col-4 text-center fs-3 fs-bold fs-gray-4">
-                                    {{ row.date }}
-                                </div>
-                                <div class="col-4">
-                                    <hr class="line-gray-1"/>
-                                </div>
-                            </div>
-                        </template>
+                        </div> 
+                        <!-- end -->
 
                         <div class="body-foot mt-20">
                             <div class="card-message-loading" v-if="loading">

@@ -112,13 +112,14 @@
     }
   ];
 
+
   export default {
     components: {
       Inbox, Task
     },
-    async fetch () {
-      await this.initUser();
-    },
+    created () {
+      this.initUser();
+    },    
     data() {
         return {
             btn_action_footer: {
@@ -137,7 +138,7 @@
     },
     methods: {
       async initUser () {
-        if (!id) {
+        if (!this.id) {
           this.iniLoad = true;
           let header = this.axiosHeader;
           header.headers['Content-Type'] = 'application/json';
