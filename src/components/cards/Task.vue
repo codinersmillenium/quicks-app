@@ -48,25 +48,26 @@
                                     <div class="flex-row flex-start">
                                         <input type="checkbox" class="check-task" 
                                             :checked="((_row.status === 1) ? true : false)"
-                                            @change="collapse($event, _row.id);checkCard($event)"
+                                            @change="collapse($event, _row.id);checkCard(i ,j)"
                                         />
                                         <div>
                                             <div class="inbox-title ml-20">
-                                                <input type="text" class="task-input" placeholder="Type Task Title" 
-                                                    :style="(_row.status === 1) ? 'display: none': ''"
+                                                <textarea 
+                                                    :class="'task-title' + ((_row.status === 1) ? ' close' : '')" placeholder="Type Task Title" 
                                                     v-model="_row.title"
-                                                    :id="'title-input-' + _row.id"
-                                                />
-                                                <div class="task-title close" 
-                                                :style="(_row.status === 0) ? 'display: none': ''"
-                                                :id="'title-' + _row.id">
+                                                    @click="editTitle($event, i, j)"
+                                                    :id="'title-' + _row.id"
+                                                >
                                                     {{ _row.title }}
-                                                </div>
+                                                </textarea>
 
                                                 <div class="inbox-time task red-1">{{ countDateEnd(_row.date) + ' days left' }}</div>
                                                 <div class="inbox-time task gray-1">{{ dateParser(_row.date, 'number', 'disabled') }}</div>
-                                                <button class="btn-action-task" @click="collapse($event, _row.id)">
-                                                    <img src="/icon/expand_more_24px_outlined.svg" />
+                                                <button class="btn-action-task" 
+                                                    :id="'btn-expand-' + _row.id"
+                                                    @click="collapse($event, _row.id)">
+                                                    <img src="/icon/expand_more_24px.svg" v-if="(_row.status === 0)"/>
+                                                    <img src="/icon/expand_more_24px_outlined.svg" v-else/>
                                                 </button>
                                                 <button class="btn-action-task edit-task" @click="showClass('delete-' + _row.id)">
                                                     <img src="/icon/btn_edit_msg.svg" />
@@ -181,12 +182,16 @@ export default {
         }
     },
     methods: {
+        editTitle (event, i, j) {
+            event.explicitOriginalTarget.className = 'task-title';
+            this.data_task[i].list[j].status = 0;
+        },
         dataPush () {
             this.loading = true;
              setTimeout(() => {
                 this.loading = false;
                 this.dataTemp = this.data_task;
-            }, 2000);
+            }, 1500);
         },
         collapse ($event, id) {
             let arrayList = $event.explicitOriginalTarget.parentElement.classList.contains('edit-task');
@@ -195,11 +200,12 @@ export default {
                     document.getElementById('desc-' + id).classList.remove('none');
                     document.getElementById('desc-' + id).classList.add('show');
                     document.getElementById('title-' + id).classList.remove('close');
-                    document
+                    document.getElementById('btn-expand-' + id).innerHTML = '<img src="/icon/expand_more_24px.svg" />';
                 } else {
                     document.getElementById('desc-' + id).classList.remove('show');
                     document.getElementById('desc-' + id).classList.add('none');
                     document.getElementById('title-' + id).classList.add('close');
+                    document.getElementById('btn-expand-' + id).innerHTML = '<img src="/icon/expand_more_24px_outlined.svg" />';
                 }
             }
         },
@@ -213,7 +219,9 @@ export default {
         },
         selectTask (item) {
             this.task_selected.id = item.id; 
-            this.task_selected.text = item.text;         
+            this.task_selected.text = item.text;
+            this.dataTemp = [];
+            this.dataPush();
         },
         deleteTask (id) {
             const deleteElem = document.getElementById('list-inbox-' + id);
@@ -222,8 +230,13 @@ export default {
                 deleteElem.classList.add('display-none');
                 deleteElemLine.classList.add('display-none');
         },
-        checkCard (event) {
-            
+        checkCard (i, j) {
+            let status = this.data_task[i].list[j].status;
+            if (status === 0) {
+                this.data_task[i].list[j].status = 1;
+            } else {
+                this.data_task[i].list[j].status = 0;
+            }
         },
         icontOptionTask () {
             let classId = document.getElementById('option-list').classList.contains('display-none');

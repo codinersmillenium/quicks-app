@@ -77,7 +77,8 @@ export default {
                 header: {
                     id: null,
                     title: null,
-                    total: 0
+                    total: 0,
+                    type_chat: null
                 }
             },
             loading: false,
@@ -127,6 +128,7 @@ export default {
                 this.detailItem.header.id = row.id;
                 this.detailItem.header.title = row.header_name;
                 this.detailItem.header.total = 0;
+                this.detailItem.header.type_chat = row.type_chat;
                 this.detailItem.data = [];
                 await inboxStore().getDetailInbox(param);
                 if (inboxStore().error === 0) {
@@ -141,6 +143,7 @@ export default {
         async cardMessage (row, i) {
             document.getElementById('inboxMessage').className = 'card index-2 show';
             row.header_name = ((i % 2 === 0) ? row.image : row.id );
+            row.type_chat = ((i % 2 === 0) ? 'group' : 'person' );
             await this.getDetailInbox(row);
             let objDiv = document.getElementById('chatBody');
             objDiv.scrollTop = objDiv.scrollHeight;

@@ -7,7 +7,7 @@
                         <button class="btn-arrow-back" @click="close"></button>
                         <div class="chat-title">
                             <div class="p-bold-primary-1">{{ header.title }}</div>
-                            <div class="p-regular-secondary-3" v-if="header.total > 0">{{ header.total }} Participant</div>
+                            <div class="p-regular-secondary-3" v-if="header.total > 0 && header.type_chat === 'group'">{{ header.total }} Participant</div>
                         </div>
                     </div>
                     <button class="btn-close-chat" @click="close"></button>
@@ -49,11 +49,11 @@
                                 </div>
                                 <div class="flex-row flex-start" v-else>
                                     <div class="chat left">
-                                        <div class="chat-name left">
+                                        <div class="chat-name left" :style="((header.type_chat === 'person') ? 'color: #2F80ED' : '')">
                                             {{ row.owner.firstName }}
                                         </div>
                                         <div class="chat-desc">
-                                            <div class="chat-card left">
+                                            <div class="chat-card left" :style="((header.type_chat === 'person') ? 'background-color: #F8F8F8' : '')">
                                                 <div class="chat-text">
                                                     {{ row.message }}
                                                 </div>
@@ -61,8 +61,17 @@
                                                     {{ row.time }}
                                                 </div>
                                             </div>
-                                            <button class="btn-chat-edit">
+                                            <button class="btn-chat-edit" @click="showEditDropdown($event, 'reply-msg-' + i)">
                                                 <img src="/icon/btn_edit_msg.svg"/>
+                                                <div class="dropdown-contet left none" :id="'reply-msg-' + i">
+                                                    <a class="edit">
+                                                        <span>Share</span>
+                                                    </a>
+                                                    <hr/>
+                                                    <a class="edit">
+                                                        <span>Reply</span>
+                                                    </a>
+                                                </div>
                                             </button>
                                         </div>
                                     </div>

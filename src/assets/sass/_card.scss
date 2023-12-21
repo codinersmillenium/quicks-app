@@ -117,10 +117,16 @@
                 max-width: 446px;
             }
             .task-title {
+                overflow: hidden;
                 color: #4F4F4F;
                 font-weight: bold;
                 font-size: $font-medium;
-                max-width: 60%;
+                width: 380px;
+                height: 40px;
+                border-radius: 5px;
+                border: 1px solid #828282;
+                resize: none;
+                border: none;
                 &.close {
                     text-decoration: line-through;
                 }
