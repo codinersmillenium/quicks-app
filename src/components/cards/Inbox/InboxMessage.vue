@@ -265,7 +265,7 @@ export default {
         async sendMessage () {
             let message = document.getElementById('input-message');
             if (message.value !== '') {
-                let header = setHeaders;
+                let header = this.axiosHeader;
                 header.headers['Content-Type'] = 'application/json';
                 const post = {                    
                     post: this.header.id,
@@ -292,7 +292,7 @@ export default {
             }
         },
         async deleteMessage (id) {
-            let header = setHeaders;
+            let header = this.axiosHeader;
             await this.axios.delete(Env.URL_API + `comment/${id}`, header).then(({ data }) => {
                 this.reloadData();
             });

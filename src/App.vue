@@ -125,7 +125,7 @@
     methods: {
       async initUser () {
         if (!localStorage.getItem('id-session')) {
-          let header = setHeaders;
+          let header = this.axiosHeader;
           header.headers['Content-Type'] = 'application/json';
           let str = generateStr(8);
           const post = {

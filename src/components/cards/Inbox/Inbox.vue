@@ -102,7 +102,7 @@ export default {
             setTimeout(async () => {
                 await this.axios.get(
                     Env.URL_API + `post?limit=${limit}`, 
-                    setHeaders
+                    this.axiosHeader
                 ).then(({ data }) => {
                     let response = data.data;
                     this.item = response;
@@ -120,7 +120,7 @@ export default {
             try {
                 let param = {                
                     url: Env.URL_API + 'post/' + row.id + '/comment',
-                    headers: setHeaders,
+                    headers: this.axiosHeader,
                     row: row
                 }
                 this.loadingMsg = true;

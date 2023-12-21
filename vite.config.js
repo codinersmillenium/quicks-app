@@ -5,11 +5,6 @@ import sass from 'sass'
 import { config } from 'dotenv'
 import { expand } from 'dotenv-expand'
 const ENV = expand(config({ path: './.env' }))
-const headerKey = {    
-  headers: {
-      'app-id': ENV.parsed.API_KEY
-  }
-};
 
 export default defineConfig({
   plugins: [vue()],
@@ -17,8 +12,7 @@ export default defineConfig({
       port: parseInt(ENV.parsed.APP_PORT)
     },
     define: {
-      Env: ENV.parsed,
-      setHeaders: headerKey
+      Env: ENV.parsed
     },
     resolve: {
       alias: {

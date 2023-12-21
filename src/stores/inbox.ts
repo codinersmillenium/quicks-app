@@ -22,7 +22,7 @@ export const inboxStore = defineStore("inbox", () => {
     detailInbox.value.data = [];
     error.value = 0;
     return this.axios.get(param.url, param.headers).then(({ data }) => {
-        let response = data.data;
+        let response: any = data.data;
         for (let obj in response) {
             let index = response[obj];
             index.time = convertDate(index.publishDate, 'time');
@@ -32,7 +32,7 @@ export const inboxStore = defineStore("inbox", () => {
           if(obj['owner']['id'] === undefined) return hash; 
           return Object.assign(hash, { [obj['owner']['id']]:( hash[obj['owner']['id']] || [] ).concat(obj)})
         }, {});
-        sort(response, 'publishDate');
+        sort(response, 'publishDate', '');
         detailInbox.value.data = response;
         detailInbox.value.header.total = Object.keys(groupBy).length;
     }).catch((err) => {
