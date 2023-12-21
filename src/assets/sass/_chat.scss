@@ -1,0 +1,270 @@
+
+.chat-header {
+    margin: 24px 32px 22px 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    button {
+        border: none;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+    .chat-title {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin-left: 20px;
+        width: 100%;
+        max-width: 429.03px;
+    }
+}
+
+.btn-arrow-back {
+    background: url('/icon/arrow_back_24px.svg') no-repeat;
+    width: 24px;
+    height: 24px;
+}
+
+.btn-close-chat {
+    background: url('/icon/close_24px.svg') no-repeat;
+    width: 24px;
+    height: 24px;
+}
+
+.chat-content {
+    margin: 24px 32px 22px 24px;
+    .chat-body {
+        display: flex;
+        flex-direction: column;
+        overflow: auto;
+        height: 301px;
+        scrollbar-color: #BDBDBD;
+        scrollbar-width: 100px;
+        // &::-webkit-scrollbar {
+        //     width: 8px;
+        //     height: 295px;
+        //     color: #BDBDBD;
+        // }
+        &::-webkit-scrollbar {
+            width: 16px;
+          }          
+        &::-webkit-scrollbar-track {
+        background-color: #e4e4e4;
+        border-radius: 100px;
+        }
+        
+        &::-webkit-scrollbar-thumb {
+        background-color: #d4aa70;
+        border-radius: 100px;
+        }
+        &::after {
+            content: "";
+            clear: both;
+            display: table;
+        }
+        @media screen and (max-width: 1920px) {&{
+            height: 245.2px
+        }}
+        .chat {
+            margin: 0px 32px 0px;
+            display: flex;
+            flex-direction: column;
+            &.left {
+                justify-content: flex-start;
+            }
+            &.right {
+                justify-content: flex-end;
+            }
+            width: 50%;
+            .chat-name {
+                margin-bottom: 5px;
+                font-size: $font-medium;
+                font-weight: bold;
+                &.right {
+                    text-align: right;
+                    color: #9B51E0;
+                }
+                &.left {
+                    text-align: left;
+                    color: #E5A443;
+                    &.new {
+                        color: #43B78D;
+                    }
+                }
+            }
+            .chat-desc {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                .chat-card {
+                    font-weight: normal;
+                    border-radius: 5px;
+                    padding: 10px;
+                    gap: 10px;
+                    color: #4F4F4F;                    
+                    &.right {
+                        background-color: #EEDCFF;
+                        width: 92%;
+                    }
+                    &.left {
+                        background-color: #FCEED3;
+                        &.new {
+                            background-color: #D2F2EA;
+                        }
+                    }         
+                    .chat-text {
+                        font-size: $font-medium;
+                        margin-bottom: 5px;
+                        white-space: normal;
+                    }            
+                    .chat-time {
+                        font-size: $font-small;
+                    }              
+                }
+                .btn-chat-edit {
+                    border: none;
+                    background: none;
+                    cursor: pointer;
+                    position: relative;
+                    img {
+                        position: absolute;
+                        top: 0;
+                        width: 16px;
+                        height: 16px;
+                    }
+                    img:hover {
+                        background-color: #EEDCFF;
+                    }
+                    .dropdown-contet {
+                        position: absolute;
+                        top: 0;
+                        margin-top: 20px;
+                        border: solid 1px #BDBDBD;
+                        border-radius: 5px;
+                        width: 126px;
+                        height: 80px;
+                        display: flex;
+                        flex-direction: column;
+                        padding: 10px;
+                        background-color: #fff;
+                        z-index: 1;
+                        &.none {
+                            display: none;
+                        }
+                        a {
+                            width: 126px;
+                            height: 40px;
+                            font-size: large;
+                            text-align: left;
+                            &.edit {
+                                color: #2F80ED;
+                            }
+                            &.delete {
+                                color: #EB5757;
+                            }
+                            span:hover {
+                                color: #BDBDBD;
+                            }
+                        }
+                        hr {
+                            margin-left: -10px;
+                            width: 125px;
+                            height: 1px;
+                            color: #BDBDBD;
+                        }
+                    }
+                }
+            }
+        }
+        .body-foot {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            .card-message-loading {
+                margin-top: auto;
+                width: 670px;
+                height: 54.41px;
+                padding: 10px;
+                border-radius: 5px;
+                gap: 11px;
+                background-color: #E9F3FF;
+                display: flex;
+                justify-items: center;
+                svg {
+                    animation: rotate 2s linear infinite;
+                    width: 34.41px;
+                    height: 34.41px;
+    
+                    & .path {
+                      stroke: #2F80ED;
+                      stroke-linecap: round;
+                      animation: dash 1.5s ease-in-out infinite;
+                    }
+                }
+                span {
+                    padding: 10px;
+                    font-size: $font-medium;
+                    color: #4F4F4F;
+                    font-weight: bold;
+                }
+            }
+            .card-message-notif {
+                display: flex;
+                margin-top: auto;
+                width: 100%;
+                justify-content: center;
+                .card-new-message {
+                    width: 141.83px;
+                    height: 33.89px;
+                    padding: 8px, 12px, 8px, 12px;
+                    border-radius: 5px;
+                    gap: 10px;
+                    background-color: #E9F3FF;
+                    text-align: center;
+                    div {
+                        color: #2F80ED;
+                        font-size: $font-medium;
+                        font-weight: bold;
+                        margin-top: 8px;
+                    }
+                }
+            }
+        }     
+    }
+    .chat-footer {
+        margin: 24px 0px 22px;
+        height: 40px;
+        .card-message {
+            .input-message {
+                width: 580px;
+                height: 40px;
+                padding: 10px, 16px, 10px, 16px;
+                border-radius: 5px;
+                border: 1px solid #828282;
+                color: #828282;
+                gap: 350px;
+                text-indent: 20px;
+                &::placeholder {
+                    font-weight: normal;
+                    font-size: $font-medium;
+                }
+            }
+        }
+    }
+}
+
+.btn {
+    width: 76px;
+    height: 40px;
+    padding: 8px, 16px, 8px, 16px;
+    border-radius: 5px;
+    gap: 10px;
+    font-size: $font-medium;
+    border: none;
+    cursor: pointer;
+    &.bg-primary {
+        background-color: #2F80ED;
+        color: #fff;
+    }
+}

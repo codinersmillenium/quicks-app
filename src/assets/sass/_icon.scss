@@ -1,0 +1,93 @@
+:root {
+   --bg-indicator-yellow: #F8B76B;
+   --bg-indicator-orange: #F2C94C;
+   --bg-indicator-primary: #8785FF;
+   --bg-indicator-red: #EB5757;
+}
+
+@mixin iconColor($bgcolor) {
+    background-color: $bgcolor;
+    border-radius:50%;
+    -moz-border-radius:50%;
+    -webkit-border-radius:50%;
+    border: none;
+    cursor: pointer;
+    transition: 0.5s;
+    img {
+        margin: auto;
+        display: block
+    }
+}
+
+.btn-action-menu {
+    .btn-action-group {
+        position: fixed;
+        right: 0;
+        bottom: 30px;
+        display: flexbox;
+        flex-direction: column;
+
+        @mixin expand($margin) {
+            margin-right: $margin;
+            transition: 0.5s;
+        }
+    
+        .btn-expand {
+            @include iconColor(var(--bg-primary));
+            margin-right: 30px;
+        }
+        .btn-task {
+            @include iconColor(var(--bg-sidebar));
+            margin-top: 10px;
+            margin-right: 34px;
+            &.open {
+                box-shadow: -15px 0px 0px #4F4F4F;
+                background-color: #F8B76B;
+            }
+        }
+        &.icon-first {
+            &.expand {
+                @include expand(60px);
+                margin-right: 85px;
+            }
+        }
+        &.icon-second {
+            &.expand {
+                @include expand(160px);
+                margin-right: 170px;
+            }
+        }
+        .btn-inbox {
+            @include iconColor(var(--bg-sidebar));
+            margin-top: 10px;
+            margin-right: 34px;
+            &.open {
+                box-shadow: -15px 0px 0px #4F4F4F;
+                background-color: var(--bg-primary);
+            }
+        }
+        &.unexpand {
+            @include expand(0px)
+        }
+        .title-action {
+            margin-left: 5px;
+            font-size: $font-large;
+            font-weight: bold;
+            color: var(--bg-sidebar);
+        }
+        .mr-open {
+            margin-right: 50px;
+        }
+    }
+   
+}
+
+.icon-size-parent {
+    width: 68px;
+    height: 68px;
+}
+
+.icon-size-child {
+    width: 60px;
+    height: 60px;
+}
