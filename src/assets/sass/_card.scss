@@ -79,9 +79,12 @@
     .card-body {
         &.scroll {
             overflow: auto;
+             @media screen and (max-width: 1920px) and (min-width: 1024px) {&{
+                height: 500.4px;
+            }}
         }
          height: 500.4px;
-         @media screen and (max-width: 1920px) {&{
+         @media screen and (max-width: 1024px) {&{
             height: 375.72px;
         }}
          .list-inbox-group {
