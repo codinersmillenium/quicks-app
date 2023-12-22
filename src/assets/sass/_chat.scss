@@ -63,8 +63,11 @@
             clear: both;
             display: table;
         }
-        @media screen and (max-width: 1920px) {&{
+        @media screen and (max-width: 1024px) {&{
             height: 245.2px
+        }}
+        @media screen and (max-width: 1920px) and (min-width: 1024px) {&{
+            height: 550.2px
         }}
         .chat {
             margin: 0px 32px 0px;
